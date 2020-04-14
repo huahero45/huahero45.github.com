@@ -346,7 +346,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/1.jpg)');
+    $('.bg-cover').css('background-image', 'url(/medias/banner/2.jpg)');
 </script>
 
 
@@ -362,13 +362,18 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
 <div class="statis">
-    <span class="count"><a href="/">2</a></span>
+    <span class="count"><a href="/">5</a></span>
     <span class="name">文章</span>
 </div>
 
 
 
 
+
+<div class="statis">
+    <span class="count"><a href="/tags">4</a></span>
+    <span class="name">标签</span>
+</div>
 
 
                     </div>
@@ -382,13 +387,18 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
 <div class="statis">
-    <span class="count"><a href="/">2</a></span>
+    <span class="count"><a href="/">5</a></span>
     <span class="name">文章</span>
 </div>
 
 
 
 
+
+<div class="statis">
+    <span class="count"><a href="/tags">4</a></span>
+    <span class="name">标签</span>
+</div>
 
 
                                 </div>
@@ -530,7 +540,7 @@
                 name: '文章篇数',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,2,0,0,0,0,0,0,0],
+                data: [1,0,0,0,0,3,0,0,0,0,0,0,0],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -596,7 +606,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: []
+                data: ["萌妹","打赏","傻彪","偏门技术"]
             }
         ],
         yAxis: [
@@ -609,7 +619,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [],
+                data: [2,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -726,6 +736,30 @@
         <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;其他技能</div>
         <div class="tag-chips center-align">
             
+            
+            <a href="/tags/%E6%89%93%E8%B5%8F/">
+                <span class="chip center-align waves-effect waves-light chip-default">打赏</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%82%BB%E5%BD%AA/">
+                <span class="chip center-align waves-effect waves-light chip-default">傻彪</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E8%90%8C%E5%A6%B9/">
+                <span class="chip center-align waves-effect waves-light chip-default">萌妹</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%81%8F%E9%97%A8%E6%8A%80%E6%9C%AF/">
+                <span class="chip center-align waves-effect waves-light chip-default">偏门技术</span>
+            </a>
+            
+            
         </div>
     </div>
     
@@ -826,7 +860,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">49</span>&nbsp;字
+                class="white-color">50</span>&nbsp;字
             
             
             
