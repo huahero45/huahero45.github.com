@@ -709,6 +709,33 @@
     </div>
 
     
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: 'ef6ee564a95ab3bcac3d',
+        clientSecret: 'd4b2c9dd80d61a1ffe2a9777b4adbd69d9e931dc',
+        repo: '',
+        owner: '',
+        admin: null,
+        id: '2019-04-22T16-55-30',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
 
     
 
@@ -729,20 +756,19 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/mei-cuo-ba-jie.html">
+                <a href="/fen-bu-shi-suo.html">
                     <div class="card-image">
                         
+                        <img src="/img/%E5%96%9C%E6%AC%A2/565989.jpg" class="responsive-img" alt="锁">
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="萌妹">
-                        
-                        <span class="card-title">萌妹</span>
+                        <span class="card-title">锁</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            好湿！天增岁月人增寿，春满乾坤福满堂！
-
+                            redissonhttps://github.com/redisson/redisson/wiki/1.-Overview 
+1）、简介Redisson是一个在Redis的基础上实现的Java驻内存数据网格（In-Memory Data G
                         
                     </div>
                     <div class="publish-info">
@@ -751,8 +777,12 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Hua hero
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%BC%80%E5%8F%91/" class="post-category">
+                                    开发
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -760,8 +790,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%90%8C%E5%A6%B9/">
-                        <span class="chip bg-color">萌妹</span>
+                    <a href="/tags/%E6%8A%80%E6%9C%AF/">
+                        <span class="chip bg-color">技术</span>
                     </a>
                     
                 </div>
