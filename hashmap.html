@@ -506,7 +506,7 @@
 <p>HashMap 通过 key 的 hashCode 经过扰动函数(即 HashMap的 hash() 方法)处理过后得到 hash 值，然后通过(n - 1) &amp; hash 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。 </p>
 <p>所谓扰动函数指的就是 HashMap 的 hash() 方法。使用 hash() 方法是为了防止一些实现比较差的hashCode() 方法, 从而可以减少碰撞。</p>
 <p>一般面试中只要回答以上就好了，但是如果自己还要加深理解的话强烈安利阅读这篇博文<br><a href="https://blog.csdn.net/sinat_33921105/article/details/103344078" target="_blank" rel="noopener">https://blog.csdn.net/sinat_33921105/article/details/103344078</a></p>
-<p>位运算符 和 除模取余运算符之间的关系:<br>    (n-1) &amp; hash =  hash % n<br>    前提: n 必须是 2的n次幂</p>
+<p>位运算符 和 除模取余运算符 之间的关系:<br>    (n-1) &amp; hash =  hash % n<br>    前提: n 必须是 2的n次幂</p>
 <h2 id="JDK-1-8-HashMap-的-hash-方法源码"><a href="#JDK-1-8-HashMap-的-hash-方法源码" class="headerlink" title="JDK 1.8 HashMap 的 hash 方法源码:"></a>JDK 1.8 HashMap 的 hash 方法源码:</h2><p>JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变。</p>
 <pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">hash</span><span class="token punctuation">(</span>Object key<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
     <span class="token keyword">int</span> h<span class="token punctuation">;</span> 
