@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="美女, 萌妹, 二次元, 动漫">
+    <meta name="keywords" content="hashmap, Java, 实现原理, JDK">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>好看滴妹纸 | 神圣天子</title>
+    <title>HashMap底层实现 | 神圣天子</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">好看滴妹纸</h1>
+                    <h1 class="description center-align post-title">HashMap底层实现</h1>
                 </div>
             </div>
         </div>
@@ -440,14 +440,23 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%90%8C%E5%A6%B9/">
-                                <span class="chip bg-color">萌妹</span>
+                            <a href="/tags/%E6%8A%80%E6%9C%AF/">
+                                <span class="chip bg-color">技术</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%BC%80%E5%8F%91/" class="post-category">
+                                开发
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -456,28 +465,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-09-07
+                    2020-02-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-04-16
+                    2020-04-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1
+                    613
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -492,7 +501,30 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Beauty"><a href="#Beauty" class="headerlink" title="Beauty"></a>Beauty</h2><p><img src="/img/%E5%A6%B9%E7%BA%B8/%E5%A6%B9%E7%BA%B8.png" alt="PANPAN"></p>
+                <h1 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h1><p>JDK1.8 之前 HashMap 底层是 数组和链表 结合在一起使用也就是 链表散列。</p>
+<p>从JDK1.8开始，HashMap 底层是 数组+链表 或 数组+红黑树，当链表长度大于阈值(默认为8)时，将链表转化为红黑树，以减少搜索时间。</p>
+<p>HashMap 通过 key 的 hashCode 经过扰动函数(即 HashMap的 hash() 方法)处理过后得到 hash 值，然后通过(n - 1) &amp; hash 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。 </p>
+<p>所谓扰动函数指的就是 HashMap 的 hash() 方法。使用 hash() 方法是为了防止一些实现比较差的hashCode() 方法, 从而可以减少碰撞。</p>
+<p>一般面试中只要回答以上就好了，但是如果自己还要加深理解的话强烈安利阅读这篇博文<br><a href="https://blog.csdn.net/sinat_33921105/article/details/103344078" target="_blank" rel="noopener">https://blog.csdn.net/sinat_33921105/article/details/103344078</a></p>
+<p>位运算符 和 除模取余运算符之间的关系:<br>    (n-1) &amp; hash =  hash % n<br>    前提: n 必须是 2的n次幂</p>
+<h2 id="JDK-1-8-HashMap-的-hash-方法源码"><a href="#JDK-1-8-HashMap-的-hash-方法源码" class="headerlink" title="JDK 1.8 HashMap 的 hash 方法源码:"></a>JDK 1.8 HashMap 的 hash 方法源码:</h2><p>JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> <span class="token function">hash</span><span class="token punctuation">(</span>Object key<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">int</span> h<span class="token punctuation">;</span> 
+    <span class="token comment" spellcheck="true">// key.hashCode()：返回散列值也就是hashcode </span>
+    <span class="token comment" spellcheck="true">// ^ ：按位异或 </span>
+    <span class="token comment" spellcheck="true">// >>>:无符号右移，忽略符号位，空位都以0补齐 </span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>key <span class="token operator">==</span> null<span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token number">0</span> <span class="token operator">:</span> <span class="token punctuation">(</span>h <span class="token operator">=</span> key<span class="token punctuation">.</span><span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>h <span class="token operator">>>></span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="JDK-1-7的-HashMap-的-hash-方法源码"><a href="#JDK-1-7的-HashMap-的-hash-方法源码" class="headerlink" title="JDK 1.7的 HashMap 的 hash 方法源码:"></a>JDK 1.7的 HashMap 的 hash 方法源码:</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">hash</span><span class="token punctuation">(</span><span class="token keyword">int</span> h<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token comment" spellcheck="true">// This function ensures that hashCodes that differ only by </span>
+    <span class="token comment" spellcheck="true">// constant multiples at each bit position have a bounded </span>
+    <span class="token comment" spellcheck="true">// number of collisions (approximately 8 at default load factor). </span>
+    h <span class="token operator">^=</span> <span class="token punctuation">(</span>h <span class="token operator">>>></span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>h <span class="token operator">>>></span> <span class="token number">12</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token keyword">return</span> h <span class="token operator">^</span> <span class="token punctuation">(</span>h <span class="token operator">>>></span> <span class="token number">7</span><span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>h <span class="token operator">>>></span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次。所谓 “拉链法” 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。<br><img src="/img/hashmap/%E6%95%B0%E7%BB%84%E9%93%BE%E8%A1%A8.png" alt="1.7之前是数组+链表"></p>
+<p>JDK1.8之后<br>相比于之前的版本， JDK1.8之后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</p>
+<p><img src="/img/hashmap/%E7%BA%A2%E9%BB%91%E6%A0%91.png" alt="1.8之后是数组+链表/红黑树"></p>
 
             </div>
             <hr/>
@@ -518,7 +550,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://konniqiwa.xyz/beauty.html">http://konniqiwa.xyz/beauty.html</a>
+                    <a href="http://konniqiwa.xyz/hashmap.html">http://konniqiwa.xyz/hashmap.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -556,8 +588,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%90%8C%E5%A6%B9/">
-                                    <span class="chip bg-color">萌妹</span>
+                                <a href="/tags/%E6%8A%80%E6%9C%AF/">
+                                    <span class="chip bg-color">技术</span>
                                 </a>
                             
                         </div>
@@ -988,9 +1020,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/hashmap.html">
                     <div class="card-image">
@@ -1009,9 +1042,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1024,6 +1057,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1042,19 +1076,20 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/lock.html">
+                <a href="/beauty.html">
                     <div class="card-image">
                         
-                        <img src="/img/%E5%96%9C%E6%AC%A2/565989.jpg" class="responsive-img" alt="锁">
                         
-                        <span class="card-title">锁</span>
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="好看滴妹纸">
+                        
+                        <span class="card-title">好看滴妹纸</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            redissonhttps://github.com/redisson/redisson/wiki/1.-Overview 
-1）、简介Redisson是一个在Redis的基础上实现的Java驻内存数据网格（In-Memory Data G
+                            Beauty
+
                         
                     </div>
                     <div class="publish-info">
@@ -1063,12 +1098,8 @@
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%BC%80%E5%8F%91/" class="post-category">
-                                    开发
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Hua hero
                             
                         </span>
                     </div>
@@ -1076,8 +1107,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%8A%80%E6%9C%AF/">
-                        <span class="chip bg-color">技术</span>
+                    <a href="/tags/%E8%90%8C%E5%A6%B9/">
+                        <span class="chip bg-color">萌妹</span>
                     </a>
                     
                 </div>
